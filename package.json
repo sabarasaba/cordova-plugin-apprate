@@ -1,5 +1,5 @@
 {
-  "name": "cordova-plugin-apprate",
+  "name": "cordova-plugin-apprate2",
   "version": "0.1.7",
   "dependencies": {
     "cordova": "*",

@@ -1,0 +1,91 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/Users/ignacio/.nvm/versions/node/v0.12.4/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@2.14.6
+3 info using node@v0.12.4
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec { raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/ignacio/Projects/cordova-plugin-apprate',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/ignacio/.npm/cordova-plugin-apprate/0.1.7/package.tgz not in flight; packing
+9 verbose tar pack [ '/Users/ignacio/.npm/cordova-plugin-apprate/0.1.7/package.tgz',
+9 verbose tar pack   '/Users/ignacio/Projects/cordova-plugin-apprate' ]
+10 verbose tarball /Users/ignacio/.npm/cordova-plugin-apprate/0.1.7/package.tgz
+11 verbose folder /Users/ignacio/Projects/cordova-plugin-apprate
+12 info prepublish cordova-plugin-apprate@0.1.7
+13 verbose addLocalTarball adding from inside cache /Users/ignacio/.npm/cordova-plugin-apprate/0.1.7/package.tgz
+14 silly cache afterAdd cordova-plugin-apprate@0.1.7
+15 verbose afterAdd /Users/ignacio/.npm/cordova-plugin-apprate/0.1.7/package/package.json not in flight; writing
+16 verbose afterAdd /Users/ignacio/.npm/cordova-plugin-apprate/0.1.7/package/package.json written
+17 silly publish { name: 'cordova-plugin-apprate',
+17 silly publish   version: '0.1.7',
+17 silly publish   dependencies:
+17 silly publish    { cordova: '*',
+17 silly publish      grunt: '*',
+17 silly publish      'grunt-codo': '*',
+17 silly publish      'grunt-contrib-coffee': '*',
+17 silly publish      'grunt-cordovacli': '*' },
+17 silly publish   readme: '# AppRate Cordova/Phonegap plugin #\n\nThis plugin provide the rate this app functionality into your Cordova/Phonegap application<br>\n\nIssues list and features requests [here](https://github.com/pushandplay/cordova-plugin-apprate/issues?state=open)\n\n[Donate with PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=MS8RQAS2NVVQW&lc=RU&item_name=github%2ecom&item_number=cordova%2dplugin%2dapprate&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)\n\n<img src="https://dl.dropboxusercontent.com/u/26238/Cordova/Plugins/AppRate/preview_iPad.png" width="100%" alt="Preview iPad"/>\n\n### Read before implementation ###\n\n+ [Begging For App Ratings](http://www.loopinsight.com/2014/02/04/begging-for-app-ratings/)\n+ [Choices And Consequences](http://bitsplitting.org/2013/12/11/choices-and-consequences/)\n+ [The importance of App Store reviews](http://www.cowlyowl.com/blog/app-store-reviews)\n+ [The Rate Friday Initiative](http://blog.edovia.com/2014/01/03/the-rate-friday-initiative/)\n+ [Prompting for App Reviews](http://dancounsell.com/articles/prompting-for-app-reviews)\n\n### Read before writing review ###\n\n+ [FAQ](https://github.com/pushandplay/cordova-plugin-apprate/wiki)\n\n## Supported platforms ##\n\n+\tiOS\n+\tAndroid\n+\tBlackberry (experimental)\n+\tWindows8 (experimental)\n\n## Requirements ##\n\nPhonegap / Cordova 3.0.0 or later\n\n## Installation ##\n\n+\tFrom github repository:\n\n\t\tcordova plugins add https://github.com/pushandplay/cordova-plugin-apprate.git\n\t\t\t\n+\tFrom apache cordova plugins registry:\n\n\t\tcordova plugins add org.pushandplay.cordova.apprate\n\t\t\n+\tFrom phonegap build add the following to your config.xml:\n\n\t\t<gap:plugin name="org.pushandplay.cordova.apprate" />\n\n## Customization and usage ##\n\n#### Note ####\nAll %@ patterns in customLocale object will be automatically replaced to your application title\n\n#### Available preferences options ####\n\n\tuseLanguage {String} null - custom BCP 47 language tag\n\tdisplayAppName {String} \'\' - custom application title\n\tpromptAgainForEachNewVersion {Boolean} true - show dialog again when application version will be updated\n\tusesUntilPrompt {Integer} 3 - count of runs of application before dialog will be displayed\n\topenStoreInApp {Boolean} false - leave app or no when application page opened in app store (now supported only for iOS)\n\tuseCustomRateDialog {Boolean} false - use custom view for rate dialog\n\tcallbacks.onButtonClicked {Function} null - call back function. called when user clicked on rate-dialog buttons\n\tcallbacks.onRateDialogShow {Function} null - call back function. called when rate-dialog showing\n\tstoreAppURL.ios {String} null - application id in AppStore\n\tstoreAppURL.android {String} null - application URL in GooglePlay\n\tstoreAppURL.blackberry {String} null - application URL in AppWorld\n\tstoreAppURL.windows8 {String} null - application URL in WindowsStore\n\tcustomLocale {Object} null - custom locale object\n\n##\tExamples ##\n\n#### Simple setup and call ####\n\n    AppRate.preferences.storeAppURL.ios = \'<my_app_id>\';\n    AppRate.preferences.storeAppURL.android = \'market://details?id=<package_name>\';\n    AppRate.preferences.storeAppURL.blackberry = \'appworld://content/[App Id]/\';\n    AppRate.preferences.storeAppURL.windows8 = \'ms-windows-store:Review?name=<the Package Family Name of the application>\';\n    AppRate.promptForRating();\n\n#### Call rate dialog immediately ####\n\n\tAppRate.preferences.storeAppURL.ios = \'<my_app_id>\';\n\tAppRate.promptForRating(true);\n\n#### Override dialog button callback ####\n\n\tvar onButtonClicked = function(buttonIndex) {\n\t\tconsole.log("onButtonClicked -> " + buttonIndex);\n\t};\n\n\tAppRate.preferences.storeAppURL.ios = \'<my_app_id>\';\n\tAppRate.preferences.storeAppURL.android = \'market://details?id=<package_name>\';\n\tAppRate.preferences.callbacks.onButtonClicked = onButtonClicked;\n\tAppRate.promptForRating();\n\t\t\n#### Set custom language ####\n\n\tAppRate.preferences.useLanguage = \'ru\';\n\tAppRate.preferences.storeAppURL.ios = \'<my_app_id>\';\n\tAppRate.preferences.storeAppURL.android = \'market://details?id=<package_name>\';\n\tAppRate.promptForRating();\n\n#### Set custom Locale object ####\n\n\tvar customLocale = {};\n\tcustomLocale.title = "Rate %@";\n\tcustomLocale.message = "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!";\n\tcustomLocale.cancelButtonLabel = "No, Thanks";\n\tcustomLocale.laterButtonLabel = "Remind Me Later";\n\tcustomLocale.rateButtonLabel = "Rate It Now";\n\n\tAppRate.preferences.storeAppURL.ios = \'<my_app_id>\';\n\tAppRate.preferences.storeAppURL.android = \'market://details?id=<package_name>\';\n\tAppRate.preferences.customLocale = customLocale;\n\tAppRate.promptForRating();\n\n#### Full setup ####\n\n\tvar customLocale = {};\n\tcustomLocale.title = "Rate %@";\n\tcustomLocale.message = "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!";\n\tcustomLocale.cancelButtonLabel = "No, Thanks";\n\tcustomLocale.laterButtonLabel = "Remind Me Later";\n\tcustomLocale.rateButtonLabel = "Rate It Now";\n\n\tAppRate.preferences.openStoreInApp = true;\n\tAppRate.preferences.storeAppURL.ios = \'<my_app_id>\';\n\tAppRate.preferences.storeAppURL.android = \'market://details?id=<package_name>\';\n\tAppRate.preferences.customLocale = customLocale;\n\tAppRate.preferences.displayAppName = \'My custom app title\';\n\tAppRate.preferences.usesUntilPrompt = 5;\n\tAppRate.preferences.promptAgainForEachNewVersion = false;\n\tAppRate.promptForRating();\n\n#### Callbacks setup and use custom rate-dialog ####\n\n\tvar onRateDialogShow = function(callback) {\n\t\tconsole.log("onRateDialogShow");\n\t\t//\tcall this callback when user click on button into your custom rate-dialog\n\t\t//\tfor example: simulate click on "Rate now" button and display store\n\t\tcallback(3)\n\t};\n\tvar onButtonClicked = function(buttonIndex) {\n\t\tconsole.log("onButtonClicked -> " + buttonIndex);\n\t};\n\n\tAppRate.preferences.storeAppURL.ios = \'<my_app_id>\';\n\tAppRate.preferences.useCustomRateDialog = true;\n\tAppRate.preferences.callbacks.onRateDialogShow = onRateDialogShow;\n\tAppRate.preferences.callbacks.onButtonClicked = onButtonClicked;\n\n\t//\tTrue param show rate-dialog immediately and useful for testing or custom logic\n\tAppRate.promptForRating(true);\n\t\t\n## Already included translations ##\nar, bn, ca, cs, da, de, de-AT, el, en, es, fa, fr, he, hi, id, il, ja, ko, nl, no, pa, pl, pt, ru, sk, sl, sv, th, tr, uk, ur, ur-IN, ur-PK, vi, zh-TW, zh-Hans, zh-Hant\n\n#### Access to locales ####\n\n\t//\tGetting list of names for available locales\n\tAppRate.locales.getLocalesNames();\n\n\t//\tGetting locale object by name\n\tAppRate.locales.getLocale(\'en\');\n\nYou can add a new translation here: [https://crowdin.net/project/apprate-cordovaphonegap-plugin](https://crowdin.net/project/apprate-cordovaphonegap-plugin)\n\t\n\n## Licence ##\n\nThe Apache 2.0 License\n',
+17 silly publish   readmeFilename: 'README.md',
+17 silly publish   gitHead: '05cbe348e468ac0e0bd194fef6609229db32346f',
+17 silly publish   description: 'This plugin provide the rate this app functionality into your Cordova/Phonegap application<br>',
+17 silly publish   _id: 'cordova-plugin-apprate@0.1.7',
+17 silly publish   scripts: {},
+17 silly publish   _shasum: '9d13faa7385bf0cd157f8b4d0f5cdd52949f2f28',
+17 silly publish   _from: '.' }
+18 verbose getPublishConfig undefined
+19 silly mapToRegistry name cordova-plugin-apprate
+20 silly mapToRegistry using default registry
+21 silly mapToRegistry registry https://registry.npmjs.org/
+22 silly mapToRegistry uri https://registry.npmjs.org/cordova-plugin-apprate
+23 verbose publish registryBase https://registry.npmjs.org/
+24 silly publish uploading /Users/ignacio/.npm/cordova-plugin-apprate/0.1.7/package.tgz
+25 verbose request uri https://registry.npmjs.org/cordova-plugin-apprate
+26 verbose request sending authorization for write operation
+27 info attempt registry request try #1 at 2:28:59 PM
+28 verbose request using bearer token for auth
+29 verbose request id 00d2facd4b1b6ec3
+30 http request PUT https://registry.npmjs.org/cordova-plugin-apprate
+31 http 403 https://registry.npmjs.org/cordova-plugin-apprate
+32 verbose headers { 'content-type': 'application/json',
+32 verbose headers   'cache-control': 'max-age=60',
+32 verbose headers   'content-length': '114',
+32 verbose headers   'accept-ranges': 'bytes',
+32 verbose headers   date: 'Thu, 15 Oct 2015 13:29:00 GMT',
+32 verbose headers   via: '1.1 varnish',
+32 verbose headers   connection: 'keep-alive',
+32 verbose headers   'x-served-by': 'cache-ams4148-AMS',
+32 verbose headers   'x-cache': 'MISS',
+32 verbose headers   'x-cache-hits': '0',
+32 verbose headers   'x-timer': 'S1444915739.095541,VS0,VE991' }
+33 verbose request invalidating /Users/ignacio/.npm/registry.npmjs.org/cordova-plugin-apprate on PUT
+34 error publish Failed PUT 403
+35 verbose stack Error: You do not have permission to publish 'cordova-plugin-apprate'. Are you logged in as the correct user? : cordova-plugin-apprate
+35 verbose stack     at makeError (/Users/ignacio/.nvm/versions/node/v0.12.4/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+35 verbose stack     at CachingRegistryClient.<anonymous> (/Users/ignacio/.nvm/versions/node/v0.12.4/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+35 verbose stack     at Request._callback (/Users/ignacio/.nvm/versions/node/v0.12.4/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+35 verbose stack     at Request.self.callback (/Users/ignacio/.nvm/versions/node/v0.12.4/lib/node_modules/npm/node_modules/request/request.js:198:22)
+35 verbose stack     at Request.emit (events.js:110:17)
+35 verbose stack     at Request.<anonymous> (/Users/ignacio/.nvm/versions/node/v0.12.4/lib/node_modules/npm/node_modules/request/request.js:1063:14)
+35 verbose stack     at Request.emit (events.js:129:20)
+35 verbose stack     at IncomingMessage.<anonymous> (/Users/ignacio/.nvm/versions/node/v0.12.4/lib/node_modules/npm/node_modules/request/request.js:1009:12)
+35 verbose stack     at IncomingMessage.emit (events.js:129:20)
+35 verbose stack     at _stream_readable.js:908:16
+36 verbose statusCode 403
+37 verbose pkgid cordova-plugin-apprate
+38 verbose cwd /Users/ignacio/Projects/cordova-plugin-apprate
+39 error Darwin 15.0.0
+40 error argv "node" "/Users/ignacio/.nvm/versions/node/v0.12.4/bin/npm" "publish"
+41 error node v0.12.4
+42 error npm  v2.14.6
+43 error code E403
+44 error You do not have permission to publish 'cordova-plugin-apprate'. Are you logged in as the correct user? : cordova-plugin-apprate
+45 error If you need help, you may report this error at:
+45 error     <https://github.com/npm/npm/issues>
+46 verbose exit [ 1, true ]
